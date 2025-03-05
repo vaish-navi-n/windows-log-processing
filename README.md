@@ -1,6 +1,6 @@
-# 🚀 Windows Log Processing & Automation System
+# 📌 Windows Log Processing & Automation System
 
-## 📌 Project Overview
+## Project Overview
 
 This project automates the extraction, processing, and storage of Windows logs using:
 
@@ -11,7 +11,7 @@ This project automates the extraction, processing, and storage of Windows logs u
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Windows PowerShell**
 - **Python (psycopg2)**
@@ -20,13 +20,13 @@ This project automates the extraction, processing, and storage of Windows logs u
 
 ---
 
-## 📜 Steps Performed
+## Steps Performed
 
 ### **1️⃣ Extracting Logs Using PowerShell**
 
 We use PowerShell to extract logs from Windows Event Viewer and save them to a text file.
 
-📌 **PowerShell Script (`extract_logs.ps1`)**:
+ **PowerShell Script (`extract_logs.ps1`)**:
 
 ```powershell
 # PowerShell script to extract logs from Windows Event Viewer
@@ -37,7 +37,7 @@ Get-EventLog -LogName System -Newest 1000 | Format-Table TimeGenerated, EntryTyp
 
 Write-Host "✅ Logs extracted and saved to $logFile"
 ```
-### 📌 What this does? (PowerShell Script)
+### What this does? (PowerShell Script)
 
 - Extracts System logs (latest 1000 logs).
 - Saves logs in a structured format in `C:\logs\system_logs.txt`.
@@ -46,13 +46,13 @@ Write-Host "✅ Logs extracted and saved to $logFile"
 
 First, install PostgreSQL and create a database to store logs.
 
-### 📌 Create a PostgreSQL Database (`windows_logs`):
+### Create a PostgreSQL Database (`windows_logs`):
 
 ```sql
 CREATE DATABASE windows_logs;
 ```
 
-### 📌 Create a PostgreSQL Database (`windows_logs`):
+### Create a PostgreSQL Database (`windows_logs`):
 
 ```sql
 CREATE TABLE logs (
@@ -64,7 +64,7 @@ CREATE TABLE logs (
 );
 ```
 
-### 📌 What this does? (PostgreSQL Table)
+### What this does? (PostgreSQL Table)
 
 - Stores log level, message, timestamp, and source file for every log entry.
 
@@ -72,7 +72,7 @@ CREATE TABLE logs (
 
 We write a Python script to read logs from `system_logs.txt` and insert them into PostgreSQL.
 
-### 📌 Python Script (`process_logs.py`):
+### Python Script (`process_logs.py`):
 
 ```python
 import psycopg2
@@ -130,7 +130,7 @@ try:
 except Exception as e:
     print(f"❌ Error: {e}")
 ```
-### 📌 What this does? (Python Script)
+### What this does? (Python Script)
 
 - Reads logs from `system_logs.txt`.
 - Categorizes logs into ERROR, WARNING, INFO, and GENERAL.
@@ -173,18 +173,18 @@ To check if logs are stored correctly, run:
 ```sql
 SELECT * FROM logs;
 ```
-###📌 What this does? (SQL Query)
+### What this does? (SQL Query)
 - Shows the stored log entries along with their timestamps and categories.
 
-###✅ Final Outcome
+### Final Outcome
 - Windows logs are extracted, processed, and stored in PostgreSQL automatically.
 - Task Scheduler runs everything daily, ensuring an automated workflow.
 - All log levels (INFO, WARNING, ERROR, GENERAL) are captured.
 
-###🔥 Future Improvements
+### Future Improvements
 - Store logs in cloud storage (AWS, Google Cloud, Azure).
 - Build a dashboard using Flask/React.js for log visualization.
 - Send email alerts for critical logs.
 
-###🎯 Summary
+### Summary
 This project automates Windows log extraction & storage using PowerShell, Python, PostgreSQL, and Task Scheduler.
